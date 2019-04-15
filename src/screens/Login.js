@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { IconContext } from 'react-icons';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { saveName } from '../ducks/name';
 import '../styles/login.css';
 
 class Login extends Component {
@@ -12,42 +11,50 @@ class Login extends Component {
         };
     }
 
+    onProceed() {
+        const { name } = this.state;
+        const { history, saveName } = this.props;
+        saveName(name);
+        history.push({
+            pathname: '/skills'
+        });
+    }
+
     render() {
         const { name } = this.state;
         return (
-            <IconContext.Provider value={{ color: 'black', className: 'Icons' }}>
-                <div className="Container" id="container">
-                    <div className="Heading">
-                        <h1>Login</h1>
-                    </div>
-                    <div className="LoginContainer">
-                        <p className="SectionTitle">What's your name?</p>
-                        <input
-                            className="TextInput"
-                            name="name"
-                            type="text"
-                            value={name}
-                            onChange={event => {
-                                this.setState({
-                                    name: event.target.value
-                                });
-                            }}
-                        />
-                        <Link className="Button" to={`/skills`}>
-                            Login
-                        </Link>
-                    </div>
+            <div className="Container">
+                <div className="Card">
+                    <span className="Title">what should we call you?</span>
+                    <input
+                        className="TextInput"
+                        name="name"
+                        type="text"
+                        value={name}
+                        onChange={event => {
+                            this.setState({
+                                name: event.target.value
+                            });
+                        }}
+                    />
+                    <button className="Button" onClick={() => this.onProceed()}>
+                        next
+                    </button>
                 </div>
-            </IconContext.Provider>
+            </div>
         );
     }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {};
+    return {
+        saveName: name => dispatch(saveName(name))
+    };
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    name: state.name
+});
 
 export default connect(
     mapStateToProps,

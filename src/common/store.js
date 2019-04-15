@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 import storage from 'redux-persist/lib/storage';
 import thunkMiddleware from 'redux-thunk';
+import name from '../ducks/name';
 import skills from '../ducks/skills';
 
 const rootPersistConfig = {
@@ -17,7 +18,8 @@ const loggerMiddleware = createLogger({
 });
 
 const rootReducer = combineReducers({
-    skills
+    skills,
+    name
 });
 
 const store = createStore(
