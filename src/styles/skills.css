@@ -1,0 +1,64 @@
+.Container {
+    flex: 1;
+    padding: 20px;
+}
+
+.Heading {
+    text-align: center;
+}
+
+.SkillsContainer {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.SectionTitle {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.SkillRow {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.SkillName {
+    margin-right: 20px;
+}
+
+.SkillRating {
+    margin-right: 20px;
+}
+
+.Label {
+    float: none;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.TextInput {
+    outline: none;
+    background-color: #ffffff;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.Button {
+    outline: none;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    width: 100px;
+}
