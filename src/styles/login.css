@@ -1,0 +1,47 @@
+.Container {
+    flex: 1;
+    padding: 20px;
+}
+
+.Heading {
+    text-align: center;
+}
+
+.LoginContainer {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.SectionTitle {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.TextInput {
+    outline: none;
+    background-color: #ffffff;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.Button {
+    flex: 1;
+    outline: none;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 20px;
+    cursor: pointer;
+    width: 80px;
+    text-decoration: none;
+}
