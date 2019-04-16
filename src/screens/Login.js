@@ -14,20 +14,22 @@ class Login extends Component {
     onProceed() {
         const { name } = this.state;
         const { history, saveName } = this.props;
-        saveName(name);
-        history.push({
-            pathname: '/skills'
-        });
+        if (name && name.length >= 2) {
+            saveName(name);
+            history.push({
+                pathname: '/skills'
+            });
+        }
     }
 
     render() {
         const { name } = this.state;
         return (
-            <div className="Container">
-                <div className="Card">
+            <div className="LoginContainer">
+                <div className="LoginCard">
                     <span className="Title">what should we call you?</span>
                     <input
-                        className="TextInput"
+                        className="NameInput"
                         name="name"
                         type="text"
                         value={name}
@@ -37,7 +39,7 @@ class Login extends Component {
                             });
                         }}
                     />
-                    <button className="Button" onClick={() => this.onProceed()}>
+                    <button className="NextButton" onClick={() => this.onProceed()}>
                         next
                     </button>
                 </div>

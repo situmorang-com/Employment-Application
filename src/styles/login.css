@@ -1,4 +1,4 @@
-.Container {
+.LoginContainer {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -8,7 +8,7 @@
     background-image: linear-gradient(to bottom right, #e0e0e0, #ffffff);
 }
 
-.Card {
+.LoginCard {
     background-color: #8a56ac;
     border-radius: 30px;
     width: 300px;
@@ -25,9 +25,10 @@
     font-size: 28px;
     margin-top: 20px;
     display: inline-block;
+    line-height: 36px;
 }
 
-.TextInput {
+.NameInput {
     border: none;
     background-color: transparent;
     border-bottom: #fff 1px solid;
@@ -41,11 +42,11 @@
     outline: none;
 }
 
-.Button {
+.NextButton {
     text-decoration: none;
     font-family: 'Comfortaa', cursive;
     font-weight: 600;
-    font-size: 26px;
+    font-size: 20px;
     color: #8a56ac;
     background-color: #fff;
     padding: 20px;
@@ -53,13 +54,14 @@
     border-radius: 30px;
     text-align: center;
     margin-top: 100px;
-    margin-left: 200px;
+    margin-left: 210px;
     border: 1px #fff solid;
     transition: all 300ms ease;
     cursor: pointer;
+    outline: none;
 }
 
-.Button:hover {
+.NextButton:hover {
     background-color: #8a56ac;
     color: #fff;
     border: 1px #fff solid;

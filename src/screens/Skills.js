@@ -62,11 +62,14 @@ class Skills extends Component {
     renderAddModal() {
         const { skillName, skillRating } = this.state;
         return (
-            <Modal isOpen={this.state.addModalVisible} onRequestClose={this.hideAddModal} className="AddModal">
-                <p className="SectionTitle">Add a new skill</p>
-                <label>Name your skill</label>
+            <Modal
+                isOpen={this.state.addModalVisible}
+                onRequestClose={this.hideAddModal}
+                className="AddModal">
+                <p className="AddTitle">Tell us about your new skill</p>
+                <label className="AddLabel">Name your skill</label>
                 <input
-                    className="TextInput"
+                    className="AddTextInput"
                     name="skill_name"
                     type="text"
                     value={skillName}
@@ -77,9 +80,9 @@ class Skills extends Component {
                     }}
                 />
                 <br />
-                <label>How would you rate yourself?</label>
+                <label className="AddLabel">How would you rate yourself?</label>
                 <input
-                    className="TextInput"
+                    className="AddTextInput"
                     name="skill_rating"
                     type="text"
                     value={skillRating}
@@ -91,10 +94,12 @@ class Skills extends Component {
                 />
                 <StarRatings
                     rating={parseFloat(skillRating)}
-                    starRatedColor="blue"
+                    starRatedColor="#000"
+                    starEmptyColor="#ccc"
+                    starHoverColor="#222"
                     numberOfStars={5}
                     name="skill_rating"
-                    starDimension={'15px'}
+                    starDimension={'30px'}
                     changeRating={rating => {
                         this.setState({
                             skillRating: rating
@@ -102,10 +107,10 @@ class Skills extends Component {
                     }}
                 />
                 <div className="ModalButtonContainer">
-                    <button onClick={() => this.hideAddModal()} className="Button">
+                    <button onClick={() => this.hideAddModal()} className="ModalCancelButton">
                         Cancel
                     </button>
-                    <button onClick={() => this.addSkill()} className="Button">
+                    <button onClick={() => this.addSkill()} className="ModalAddButton">
                         Add
                     </button>
                 </div>
@@ -120,28 +125,37 @@ class Skills extends Component {
         if (skills.length === 0)
             return (
                 <div>
-                    <p>You have not added any skills yet. Add one now</p>
+                    <p>You have not added any skills yet. Go ahead and add one now.</p>
                 </div>
             );
 
         skills.map(skill => {
             renderedSkills = renderedSkills.concat(
-                <div key={skill.name} className="SkillRow">
-                    <span className="SkillName">{skill.name}</span>
-                    <StarRatings
-                        className="SkillRating"
-                        rating={parseFloat(skill.rating)}
-                        starRatedColor="blue"
-                        numberOfStars={5}
-                        name="rating"
-                        starDimension={'15px'}
-                    />
-                    <MdAdd onClick={() => this.showAddModal(skill.id)} />
+                <div>
+                    <div key={skill.name} className="SkillRow">
+                        <span className="SkillName">{skill.name}</span>
+                        <StarRatings
+                            className="SkillRating"
+                            rating={parseFloat(skill.rating)}
+                            starRatedColor="#000"
+                            starEmptyColor="#ccc"
+                            numberOfStars={5}
+                            name="rating"
+                            starDimension={'20px'}
+                        />
+                        <MdAdd
+                            onClick={() => this.showAddModal(skill.id)}
+                            className="SkillAddButton"
+                        />
+                    </div>
                     {skill.subSkills && (
-                        <div className="SubSkillsContainer">{this.renderSubSKills(skill.subSkills)}</div>
+                        <div className="SubSkillsContainer">
+                            {this.renderSubSKills(skill.subSkills)}
+                        </div>
                     )}
                 </div>
             );
+            return null;
         });
 
         return renderedSkills;
@@ -151,39 +165,49 @@ class Skills extends Component {
         let renderedSkills = [];
         skills.map(skill => {
             renderedSkills = renderedSkills.concat(
-                <div key={skill.name} className="SkillRow">
-                    <span className="SkillName">{skill.name}</span>
-                    <StarRatings
-                        className="SkillRating"
+                <div key={skill.name} className="SubSkillChip">
+                    <span className="SubSkillName">{skill.name}</span>
+                    <span className="SubSkillRating">{parseFloat(skill.rating)}</span>
+                    {/* <StarRatings
+                        className="SubSkillRating"
                         rating={parseFloat(skill.rating)}
-                        starRatedColor="blue"
+                        starRatedColor="#000"
+                        starEmptyColor="#ccc"
                         numberOfStars={5}
                         name="rating"
-                        starDimension={'15px'}
-                    />
+                        starDimension={'12px'}
+                    /> */}
                 </div>
             );
+            return null;
         });
 
         return renderedSkills;
     }
 
+    renderMainCard() {
+        const name = this.props.name ? ', ' + this.props.name.name : '';
+        const { skills } = this.state;
+        return (
+            <div className="Card">
+                {skills && skills.length > 0 ? (
+                    this.renderSkills()
+                ) : (
+                    <span className="Title">
+                        you haven't added any skills yet{name}. why don't you add one now?
+                    </span>
+                )}
+                <button className="AddButton" onClick={() => this.showAddModal()}>
+                    add skill
+                </button>
+            </div>
+        );
+    }
+
     render() {
         return (
             <IconContext.Provider value={{ color: 'black', className: 'Icons' }}>
-                <div className="Container" id="container">
-                    <div className="Heading">
-                        <h1>Skills</h1>
-                    </div>
-                    <div className="SkillsContainer">
-                        <p className="SectionTitle">Your skills</p>
-                        {this.renderSkills()}
-                        <button onClick={() => this.showAddModal()} className="Button">
-                            <MdAdd />
-                            ADD
-                        </button>
-                    </div>
-                </div>
+                <div className="Container">{this.renderMainCard()}</div>
                 {this.renderAddModal()}
             </IconContext.Provider>
         );
@@ -197,7 +221,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => ({
-    skills: state.skills
+    skills: state.skills,
+    name: state.name
 });
 
 export default connect(
